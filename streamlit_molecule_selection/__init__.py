@@ -47,12 +47,14 @@ def st_molecule_selection(content, ftype: str = "smiles", *,
                           nop_selection=False,
                           min_allowed_atoms: int = 5,
                           max_allowed_atoms_percent: float = 0.9,
+                          height=None,
                           key = None): # noqa
     if ftype not in ('smiles', 'mol'):
         raise ValueError('ftype must be one of "smiles" or "mol"')
     params = {
         "content": content,
         "ftype": f'{ftype}',
+        "height": height,
         "min_allowed_atoms": min_allowed_atoms,
         "max_allowed_atoms_percent": max_allowed_atoms_percent,
         "nop_selection": nop_selection,
@@ -63,7 +65,7 @@ def st_molecule_selection(content, ftype: str = "smiles", *,
 
 if (not _RELEASE) or os.getenv('SHOW_MOLECULE_SELECTION_DEMO'):
     import streamlit as st
-    st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O'))
+    st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O', height=200))
     st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O', nop_selection=True, key='2'))
 
     # st_molstar_remote("https://files.rcsb.org/view/1LOL.cif", key='sds')

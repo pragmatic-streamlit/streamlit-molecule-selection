@@ -28,7 +28,9 @@ class App extends StreamlitComponentBase<State> {
         const nop_selection = this.props.args["nop_selection"]
         const min_allowed_atoms = this.props.args["min_allowed_atoms"]
         const max_allowed_atoms_percent = this.props.args["max_allowed_atoms_percent"]
+        const height = this.props.args["height"]
         return (
+            <div style={height? {height: height, overflow: "scroll"}:{}}>
             <Mol2DSelector
                 smiles={ftype === 'smiles' ? content : ''}
                 mol={ftype === 'mol' ? content : ''}
@@ -79,6 +81,7 @@ class App extends StreamlitComponentBase<State> {
                 }}
                 selection={preset_selections? preset_selections : []}
             />
+            </div>
         )
     }
 }
