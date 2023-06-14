@@ -65,7 +65,7 @@ def st_molecule_selection(content, ftype: str = "smiles", *,
 
 if (not _RELEASE) or os.getenv('SHOW_MOLECULE_SELECTION_DEMO'):
     import streamlit as st
-    st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O', height=200))
+    st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O', height=100))
     st.write(st_molecule_selection('CC(C)CN(CC(C(CC1CCCCC1)NC(OC1C(CCO2)C2OC1)=O)O)S(C(CC1)CCC1N)(=O)=O', nop_selection=True, key='2'))
 
     # st_molstar_remote("https://files.rcsb.org/view/1LOL.cif", key='sds')

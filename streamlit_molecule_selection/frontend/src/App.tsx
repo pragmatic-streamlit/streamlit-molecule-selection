@@ -30,13 +30,15 @@ class App extends StreamlitComponentBase<State> {
         const max_allowed_atoms_percent = this.props.args["max_allowed_atoms_percent"]
         const height = this.props.args["height"]
         return (
-            <div style={height? {height: height, overflow: "scroll"}:{}}>
+            <div id="overflow" style={height? {height: height, overflow: "scroll", scrollBehavior: "smooth"}:{}}>
             <Mol2DSelector
                 smiles={ftype === 'smiles' ? content : ''}
                 mol={ftype === 'mol' ? content : ''}
                 onMol2DInstanceCreated={(instance, selectionWithHydrogen) => {
                     this.forceResize();
-                    this.ref = instance
+                    this.ref = instance;
+                    var overflowContainer = document.getElementById('overflow');
+                    overflowContainer && (overflowContainer.scrollTop = overflowContainer.scrollHeight/2 - 100);
                 }}
                 onSelectionChanged={(selection, selectionWithHydrogen) => {
                     if (nop_selection){
