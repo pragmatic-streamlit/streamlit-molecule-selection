@@ -49,6 +49,7 @@ class App extends StreamlitComponentBase<State> {
                     if (selection.length < min_allowed_atoms) {
                         status && (status.innerText = `Select at least ${min_allowed_atoms} heavy atoms.`);
                         this.forceResize();
+                        Streamlit.setComponentValue(null)
                         return;
                     }
                     if (
@@ -56,6 +57,7 @@ class App extends StreamlitComponentBase<State> {
                     ) {
                         status && (status.innerText = `Select up to ${max_allowed_atoms_percent*100}% of heavy atoms.`);
                         this.forceResize();
+                        Streamlit.setComponentValue(null)
                         return;
                     }
                     const queue = [selection[0]];
@@ -72,6 +74,7 @@ class App extends StreamlitComponentBase<State> {
                     if (selectedAtomsSet.size) {
                         status && (status.innerText = "Selected atoms need to be connected.");
                         this.forceResize();
+                        Streamlit.setComponentValue(null)
                         return;
                     }
                     status && (status.innerText = "Selected atoms successfully.");
