@@ -9,6 +9,7 @@ interface Mol2DSelectorProps {
     selection: number[];
     mol?: string;
     smiles?: string;
+    nop_selection?: boolean;
 }
 
 export const Mol2DSelector = React.memo((props: Mol2DSelectorProps) => {
@@ -16,6 +17,7 @@ export const Mol2DSelector = React.memo((props: Mol2DSelectorProps) => {
         mol,
         smiles,
         selection,
+        nop_selection,
         onMol2DInstanceCreated,
         onSelectionChanged,
     } = props;
@@ -137,6 +139,9 @@ export const Mol2DSelector = React.memo((props: Mol2DSelectorProps) => {
                     isMoving.current = true;
                 }}
                 onClick={() => {
+                    if (nop_selection){
+                        return
+                    }
                     const { model, drawPane, toolBar } = selector.current;
                     if (highlightAtom.current !== undefined) {
                         const selected = !model.mMol.isSelectedAtom_0(highlightAtom.current);

@@ -32,6 +32,7 @@ class App extends StreamlitComponentBase<State> {
         return (
             <div id="overflow" style={height? {height: height, overflow: "scroll", scrollBehavior: "smooth"}:{}}>
             <Mol2DSelector
+                nop_selection={nop_selection}
                 smiles={ftype === 'smiles' ? content : ''}
                 mol={ftype === 'mol' ? content : ''}
                 onMol2DInstanceCreated={(instance, selectionWithHydrogen) => {
