@@ -88,9 +88,19 @@ export const Mol2DSelector = React.memo((props: Mol2DSelectorProps) => {
             instance.setAtomHightlightCallback((atom: number, selected: boolean) => {
                 highlightAtom.current = selected ? atom : undefined;
             });
+
             instance.setBondHightlightCallback((bond: number, selected: boolean) => {
                 highlightBond.current = selected ? bond : undefined;
             });
+
+            const originClicked = instance.onMouseClicked;
+            instance.onMouseClicked = (...event: any) => {
+                const res = originClicked.call(instance, ...event);
+                if (res) {
+                    highlightAtom.current = res.atom === -1 ? undefined : res.atom;
+                    highlightBond.current = res.bond === -1 ? undefined : res.bond;
+                }
+            }
 
             // if (!isEditing) {
             //     // @ts-ignore
@@ -143,6 +153,7 @@ export const Mol2DSelector = React.memo((props: Mol2DSelectorProps) => {
                         return
                     }
                     const { model, drawPane, toolBar } = selector.current;
+
                     if (highlightAtom.current !== undefined) {
                         const selected = !model.mMol.isSelectedAtom_0(highlightAtom.current);
                         model.mMol.setAtomSelection_0(highlightAtom.current, selected);
